@@ -1,0 +1,12 @@
+125,128,2
+0,20000,training-0-moises_luz_acesa-2019-11-02_21-58.txt
+0,20000,training-0-moises_luz_apagada-2019-11-02_22-03.txt
+0,40000,training-0-moises_luz_apagada-2019-11-02_22-20.txt
+0,40000,training-0-moises_luz_apagada-falso-positivo-2019-11-06_20-54.txt
+0,10000,training-0-chao-dia-mainprofile-2019-11-08_1.txt
+0,10000,training-0-chao-dia-mainprofile-2019-11-08_2.txt
+0,10000,training-0-noite-moises-falso-positivo-2019-11-21_21-31.txt
+1,40000,training-1-thiago-moises-escuro-2019-11-06_20-54_2.txt
+#1,40000,training-1-thiago-moises-escuro-pacotinho-2019-11-05_23-30.txt
+1,40000,training-1-thiago-moises-escuro-pacotinho-2019-11-05_23-30-sem_parte_ruim.txt
+1,10000,training-1-thiago_no_bebe_conforto-2019-11-03_05-31.txt

@@ -1,0 +1,57 @@
+#!/usr/bin/python
+
+# Import modules for CGI handling 
+import cgi, cgitb 
+import os, time
+
+# Create instance of FieldStorage 
+form = cgi.FieldStorage() 
+
+# Get data from fields
+action = form.getvalue('action')
+fnAction = "../tmp/alarm-action"
+if not action is None:
+    open(fnAction,"w").write(str(action))
+
+actionStatus = open(fnAction,"r").read()
+
+stat = os.stat(fnAction)
+lastMod = time.ctime(stat.st_mtime)
+
+print("Content-type:text/html\r\n\r\n")
+print('<html>')
+print('<head>')
+print('<meta name="viewport" content="width=device-width, initial-scale=1.5">')
+print('<title>Hello Word - First CGI Program</title>')
+print('</head>')
+print('<body>')
+print('Status: %s<br />' % (actionStatus))
+print('<small>LastMod: %s</small><br /><br/>' % (lastMod))
+
+print('\
+<form action = "" method = "get">\
+<input type="hidden" name="action" value="on">\
+<input type = "submit" value = "On" />\
+</form><br/>\
+')
+
+print('\
+<form action = "" method = "get">\
+<input type="hidden" name="action" value="off">\
+<input type = "submit" value = "Off" />\
+</form><br/>\
+')
+
+print('\
+<form action = "" method = "get">\
+<input type="hidden" name="action" value="snooze">\
+<input type = "submit" value = "Snooze" />\
+</form><br/>\
+')
+
+#cwd = os.getcwd()
+#print("cwd: %s<br />" % cwd)
+
+
+print('</body>')
+print('</html>')
