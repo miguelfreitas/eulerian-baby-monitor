@@ -47,4 +47,8 @@ This will execute RVM program (I still need to go through GUI menus to open came
 
 ![Whole night baby's movement and breathing](images/data-2019_12_23-night.png)
 
+Whole night baby's movement and breathing data. The blue line (`vals`) is the acquired data which is actually fed into the neural network model for prediction. The green line (`pred`) is the output of the model ranging from 1.0 (breathing or moving) to 0.0 (no movement / no baby). `avgPred` and `medPred` are smoothed versions of predicted `pred` data. Red dots (`alarm`) show whenever the alarms starts (1) or stops (0).
+
 ![Detail of irregular (but normal) newborn's breathing pattern](images/data-2019_11_06-newborn-breathing.png)
+
+Detail of a newborn's irregular breathing pattern. In this case the baby stopped breathing for about 5 seconds. This is perfectly normal (literature says that up to 10 seconds of no breathing is commonly seen in newborns).
