@@ -45,7 +45,10 @@ fps = 25.
 inputLen = fps*5 # 5 segundos de video
 avgLen = 5 # quantas predicoes de inputLen seguidas (x5s = 25seg total)
 alarmDelay = 2 # quantas medias regidas abaixo de 0.5 para alarmar (da um delay de confirmacao: 25+10=35)
-model = load_model('model_tst_%d.h5' % (inputLen))
+inputTuples = 1
+#model = load_model('model_tst_%d.h5' % (inputLen))
+model = load_model('model_tst_%d-%d.h5' % (inputLen, inputTuples))
+
 
 inputBuffer = []
 avgPredBuffer = []
@@ -58,15 +61,20 @@ plotAvgPred = []
 plotMedPred = []
 plotAlarm = [(0,0)]
 
-def addVal(val):
+def addVal(vals):
     global inputBuffer, avgPredBuffer,  delayCounter, sampleCounter
     global plotVals, plotPred, plotAvgPred, plotMedPred, plotAlarm
     
+    val = vals[0]
     if val:
         #print( "addVal", val)
         if args.plot:
             plotVals.append( (sampleCounter, val) )
-        inputBuffer.append(val)
+
+        if inputTuples == 1:
+            inputBuffer.append(val)
+        else:
+            inputBuffer.append(vals)
         if len(inputBuffer) == inputLen:
             data = np.array([inputBuffer])
             pred = model.predict(array(data))[0,0]
@@ -110,7 +118,7 @@ for line in inputFile:
     val = None
     try:
         vals = [float(x) for x in line.split(" ")]
-        val = vals[0]
+        #val = vals[0]
         
         #teste com stdev
         '''
@@ -122,7 +130,7 @@ for line in inputFile:
             outputFile.write(line)
     except:
         pass
-    addVal(val)
+    addVal(vals)
 
 if args.plot:
     plotVals = array(plotVals)
@@ -137,6 +145,7 @@ if args.plot:
         limitVals = 100 * stdVals
         plotVals[ plotVals[:,1] > limitVals ,1] = limitVals
     
+    fps = 1
     plot( plotVals[:,0]/fps, plotVals[:,1] / max(plotVals[:,1]), color='b', label = "vals" )
     plot( plotPred[:,0]/fps, plotPred[:,1], color='g', label = "pred" )
     plot( plotAvgPred[:,0]/fps, plotAvgPred[:,1], 'o', color='y', label = "avgPred" )
